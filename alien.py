@@ -17,5 +17,13 @@ class Alien(Sprite):
         self.screen.blit(self.image, self.rect)
 
     def update(self):
-        self.x += self.game_settings.alien_speed
+        self.x += (self.game_settings.alien_speed *
+                   self.game_settings.fleet_direction)
         self.rect.x = self.x
+
+    def check_edges(self):
+        screen_rect = self.screen.get_rect()
+        if self.rect.right >= screen_rect.right:
+            return True
+        elif self.rect.left <= screen_rect.left:
+            return False
